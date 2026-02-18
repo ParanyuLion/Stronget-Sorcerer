@@ -139,6 +139,13 @@ canvas.p5Canvas {
 }
 
 /* ─── Technique‑specific accent colours ─── */
+.accent-hollow {
+  color: #df80ff !important;
+  text-shadow:
+    0 0 40px #df80ff,
+    0 0 80px #aa00ff,
+    0 0 120px #7700cc !important;
+}
 .accent-gojo {
   color: #b388ff !important;
   text-shadow:

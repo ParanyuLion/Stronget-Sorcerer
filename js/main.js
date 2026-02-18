@@ -5,6 +5,13 @@
 
 /* ─────────── Effect registry (add new techniques here) ─── */
 const EFFECTS = {
+  GOJO_HOLLOW_PURPLE: {
+    module: HollowPurpleEffect,
+    label: "Hollow Purple",
+    sub: "虚式・茈 — Limitless Cursed Technique",
+    accent: "accent-hollow",
+    threejs: true, // rendered by Three.js, not p5
+  },
   GOJO_UNLIMITED_VOID: {
     module: GojoEffect,
     label: "Unlimited Void",
@@ -52,6 +59,8 @@ function setup() {
   colorMode(RGB, 255, 255, 255, 255);
   _p5 = this;
   HandTracker.init();
+  // Initialise Three.js Hollow Purple scene
+  HollowPurpleEffect.init();
 }
 
 function windowResized() {
@@ -111,6 +120,18 @@ function draw() {
   if (activeTechnique !== prevTechnique) {
     if (prevTechnique && EFFECTS[prevTechnique]) {
       EFFECTS[prevTechnique].module.clear();
+      // Deactivate Three.js loop if leaving hollow purple
+      if (EFFECTS[prevTechnique].threejs) {
+        EFFECTS[prevTechnique].module.deactivate();
+      }
+    }
+    // Activate Three.js loop when entering hollow purple
+    if (
+      activeTechnique &&
+      EFFECTS[activeTechnique] &&
+      EFFECTS[activeTechnique].threejs
+    ) {
+      EFFECTS[activeTechnique].module.activate(ht.handPower);
     }
     _updateHUD(activeTechnique);
     prevTechnique = activeTechnique;
@@ -121,9 +142,16 @@ function draw() {
     const fx = EFFECTS[activeTechnique];
     const power = ht.handPower;
 
-    fx.module.spawn(_p5, power);
-    fx.module.update(_p5);
-    fx.module.draw(_p5);
+    if (fx.threejs) {
+      // Pass INDEX_FINGER_TIP landmark to Three.js for ball tracking
+      if (ht.multiHandLandmarks.length > 0) {
+        HollowPurpleEffect.setLandmarkPosition(ht.multiHandLandmarks[0][8]);
+      }
+    } else {
+      fx.module.spawn(_p5, power);
+      fx.module.update(_p5);
+      fx.module.draw(_p5);
+    }
 
     elBar.style.width = `${power * 100}%`;
   } else {

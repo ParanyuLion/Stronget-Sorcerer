@@ -75,6 +75,14 @@ const GestureDetection = (() => {
     if (numHands >= 1) {
       const lm = multiHandLandmarks[0];
 
+      /* Gojo — Hollow Purple (HIGHEST PRIORITY single‑hand)
+         Pinch: THUMB_TIP(4) and INDEX_FINGER_TIP(8) very close,
+         OR crossed fingers — both map to hollow purple / Gojo sign. */
+      const pinchDist = dist(lm[TIP.THUMB], lm[TIP.INDEX]);
+      if (pinchDist < 0.05) {
+        return { technique: "GOJO_HOLLOW_PURPLE" };
+      }
+
       /* Gojo — Unlimited Void
          Index & middle finger tips very close AND x‑coords crossed. */
       if (_indexMiddleCrossed(lm)) {
