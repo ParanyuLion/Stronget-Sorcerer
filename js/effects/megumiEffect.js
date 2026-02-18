@@ -4,13 +4,13 @@
    ═══════════════════════════════════════════════════════════ */
 
 const MegumiEffect = (() => {
-  const shadows  = [];
-  const trails   = [];
-  const sigils   = [];
+  const shadows = [];
+  const trails = [];
+  const sigils = [];
 
   const MAX_SHADOWS = 80;
-  const MAX_TRAILS  = 200;
-  const MAX_SIGILS  = 8;
+  const MAX_TRAILS = 200;
+  const MAX_SIGILS = 8;
 
   /* ── Shadow particle (wolf‑like swarm) ── */
   class ShadowParticle {
@@ -136,8 +136,8 @@ const MegumiEffect = (() => {
     p.fill(4, 4, 20, 35);
     p.rect(0, 0, p.width, p.height);
 
-    for (const s of sigils)  s.draw(p);
-    for (const t of trails)  t.draw(p);
+    for (const s of sigils) s.draw(p);
+    for (const t of trails) t.draw(p);
     for (const s of shadows) s.draw(p);
 
     // Floor shadow gradient
@@ -150,8 +150,8 @@ const MegumiEffect = (() => {
 
   function clear() {
     shadows.length = 0;
-    trails.length  = 0;
-    sigils.length  = 0;
+    trails.length = 0;
+    sigils.length = 0;
   }
 
   return { spawn, update, draw, clear };

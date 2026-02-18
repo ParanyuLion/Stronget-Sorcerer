@@ -7,43 +7,43 @@
 const EFFECTS = {
   GOJO_UNLIMITED_VOID: {
     module: GojoEffect,
-    label: 'Unlimited Void',
-    sub: '無量空処 — Domain Expansion',
-    accent: 'accent-gojo',
+    label: "Unlimited Void",
+    sub: "無量空処 — Domain Expansion",
+    accent: "accent-gojo",
   },
   SUKUNA_MALEVOLENT_SHRINE: {
     module: SukunaEffect,
-    label: 'Malevolent Shrine',
-    sub: '伏魔御廚子 — Domain Expansion',
-    accent: 'accent-sukuna',
+    label: "Malevolent Shrine",
+    sub: "伏魔御廚子 — Domain Expansion",
+    accent: "accent-sukuna",
   },
   MEGUMI_DIVINE_DOGS: {
     module: MegumiEffect,
-    label: 'Divine Dogs',
-    sub: '玉犬 — Ten Shadows Technique',
-    accent: 'accent-megumi',
+    label: "Divine Dogs",
+    sub: "玉犬 — Ten Shadows Technique",
+    accent: "accent-megumi",
   },
   MAHITO_SELF_EMBODIMENT: {
     module: MahitoEffect,
-    label: 'Self‑Embodiment of Perfection',
-    sub: '無為転変 — Idle Transfiguration',
-    accent: 'accent-mahito',
+    label: "Self‑Embodiment of Perfection",
+    sub: "無為転変 — Idle Transfiguration",
+    accent: "accent-mahito",
   },
 };
 
 /* ─────────── State ─────────────────────────────────────── */
-let activeTechnique = null;   // key into EFFECTS
-let prevTechnique   = null;
-let idleFrames      = 0;
-const IDLE_THRESHOLD = 40;    // frames before we consider "idle" and fade
-let _p5;                      // captured p5 instance for safe access
+let activeTechnique = null; // key into EFFECTS
+let prevTechnique = null;
+let idleFrames = 0;
+const IDLE_THRESHOLD = 40; // frames before we consider "idle" and fade
+let _p5; // captured p5 instance for safe access
 
 /* ─────────── DOM refs ──────────────────────────────────── */
-const elName  = document.getElementById('technique-name');
-const elSub   = document.getElementById('technique-sub');
-const elBar   = document.getElementById('power-bar');
-const elBarC  = document.getElementById('power-bar-container');
-const elIdle  = document.getElementById('idle-prompt');
+const elName = document.getElementById("technique-name");
+const elSub = document.getElementById("technique-sub");
+const elBar = document.getElementById("power-bar");
+const elBarC = document.getElementById("power-bar-container");
+const elIdle = document.getElementById("idle-prompt");
 
 /* ─────────── p5.js sketch (global mode) ────────────────── */
 
@@ -68,7 +68,7 @@ function draw() {
     translate(width, 0);
     scale(-1, 1); // mirror
     // Cover the canvas while maintaining aspect ratio
-    const vw = videoEl.videoWidth  || width;
+    const vw = videoEl.videoWidth || width;
     const vh = videoEl.videoHeight || height;
     const scale2 = Math.max(width / vw, height / vh);
     const dw = vw * scale2;
@@ -91,7 +91,7 @@ function draw() {
   if (ht.ready && ht.multiHandLandmarks.length > 0) {
     const result = GestureDetection.detectJJKSigns(
       ht.multiHandLandmarks,
-      ht.multiHandedness
+      ht.multiHandedness,
     );
     detected = result.technique;
   }
@@ -142,24 +142,24 @@ function draw() {
 
 function _updateHUD(technique) {
   // Remove all accent classes
-  elName.className = '';
-  elSub.className  = '';
+  elName.className = "";
+  elSub.className = "";
 
   if (technique && EFFECTS[technique]) {
     const fx = EFFECTS[technique];
     elName.textContent = fx.label;
-    elSub.textContent  = fx.sub;
-    elName.classList.add('active', fx.accent);
-    elSub.classList.add('active');
-    elBarC.classList.add('active');
-    elIdle.classList.add('hidden');
+    elSub.textContent = fx.sub;
+    elName.classList.add("active", fx.accent);
+    elSub.classList.add("active");
+    elBarC.classList.add("active");
+    elIdle.classList.add("hidden");
   } else {
-    elName.classList.remove('active');
-    elSub.classList.remove('active');
-    elBarC.classList.remove('active');
-    elIdle.classList.remove('hidden');
-    elName.textContent = '';
-    elSub.textContent  = '';
-    elBar.style.width = '0%';
+    elName.classList.remove("active");
+    elSub.classList.remove("active");
+    elBarC.classList.remove("active");
+    elIdle.classList.remove("hidden");
+    elName.textContent = "";
+    elSub.textContent = "";
+    elBar.style.width = "0%";
   }
 }

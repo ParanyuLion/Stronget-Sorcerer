@@ -4,13 +4,13 @@
    ═══════════════════════════════════════════════════════════ */
 
 const SukunaEffect = (() => {
-  const slashes   = [];
-  const embers    = [];
-  const cracks    = [];
+  const slashes = [];
+  const embers = [];
+  const cracks = [];
 
   const MAX_SLASHES = 25;
-  const MAX_EMBERS  = 300;
-  const MAX_CRACKS  = 40;
+  const MAX_EMBERS = 300;
+  const MAX_CRACKS = 40;
 
   /* ── Slash line ── */
   class Slash {
@@ -23,7 +23,7 @@ const SukunaEffect = (() => {
       this.y1 = cy + Math.sin(angle) * p.random(20, 200);
       this.x2 = this.x1 + Math.cos(angle + p.random(-0.4, 0.4)) * len;
       this.y2 = this.y1 + Math.sin(angle + p.random(-0.4, 0.4)) * len;
-      this.progress = 0;           // 0→1 animation
+      this.progress = 0; // 0→1 animation
       this.speed = p.random(0.06, 0.14);
       this.weight = p.random(1.5, 4);
       this.alpha = 255;
@@ -147,15 +147,15 @@ const SukunaEffect = (() => {
     p.fill(80 + pulse, 0, 0, 15);
     p.rect(0, 0, p.width, p.height);
 
-    for (const c of cracks)  c.draw(p);
+    for (const c of cracks) c.draw(p);
     for (const s of slashes) s.draw(p);
-    for (const e of embers)  e.draw(p);
+    for (const e of embers) e.draw(p);
   }
 
   function clear() {
     slashes.length = 0;
-    embers.length  = 0;
-    cracks.length  = 0;
+    embers.length = 0;
+    cracks.length = 0;
   }
 
   return { spawn, update, draw, clear };

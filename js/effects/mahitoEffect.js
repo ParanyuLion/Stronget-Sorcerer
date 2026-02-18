@@ -4,12 +4,12 @@
    ═══════════════════════════════════════════════════════════ */
 
 const MahitoEffect = (() => {
-  const waves     = [];
+  const waves = [];
   const soulParts = [];
-  const glitches  = [];
+  const glitches = [];
 
-  const MAX_WAVES  = 10;
-  const MAX_PARTS  = 250;
+  const MAX_WAVES = 10;
+  const MAX_PARTS = 250;
   const MAX_GLITCH = 20;
 
   /* ── Distortion wave ── */
@@ -39,10 +39,7 @@ const MahitoEffect = (() => {
       for (let a = 0; a < p.TWO_PI; a += 0.15) {
         const wobble = Math.sin(a * 6 + p.frameCount * 0.1) * 8;
         const rr = this.r + wobble;
-        p.vertex(
-          this.x + Math.cos(a) * rr,
-          this.y + Math.sin(a) * rr
-        );
+        p.vertex(this.x + Math.cos(a) * rr, this.y + Math.sin(a) * rr);
       }
       p.endShape(p.CLOSE);
     }
@@ -78,7 +75,12 @@ const MahitoEffect = (() => {
       // Core
       p.fill(160, 255, 100, a);
       const morph = this.size + Math.sin(this.phase * 3) * 2;
-      p.ellipse(this.x, this.y, morph, morph * (0.7 + Math.sin(this.phase) * 0.3));
+      p.ellipse(
+        this.x,
+        this.y,
+        morph,
+        morph * (0.7 + Math.sin(this.phase) * 0.3),
+      );
     }
   }
 
@@ -135,8 +137,8 @@ const MahitoEffect = (() => {
     p.fill(5, 15, 5, 35);
     p.rect(0, 0, p.width, p.height);
 
-    for (const g of glitches)  g.draw(p);
-    for (const w of waves)     w.draw(p);
+    for (const g of glitches) g.draw(p);
+    for (const w of waves) w.draw(p);
     for (const s of soulParts) s.draw(p);
 
     // Central soul glow
@@ -147,9 +149,9 @@ const MahitoEffect = (() => {
   }
 
   function clear() {
-    waves.length     = 0;
+    waves.length = 0;
     soulParts.length = 0;
-    glitches.length  = 0;
+    glitches.length = 0;
   }
 
   return { spawn, update, draw, clear };

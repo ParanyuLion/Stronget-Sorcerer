@@ -9,7 +9,7 @@ const HandTracker = (() => {
     multiHandedness: [],
     handPower: 0,
     ready: false,
-    videoEl: null,  // live <video> element — always current
+    videoEl: null, // live <video> element — always current
   };
 
   /** Compute a 0‥1 "power" from the distance between WRIST(0) and MIDDLE_FINGER_MCP(9). */
@@ -18,15 +18,15 @@ const HandTracker = (() => {
     const w = landmarks[0];
     const m = landmarks[9];
     const d = Math.sqrt(
-      (m.x - w.x) ** 2 + (m.y - w.y) ** 2 + ((m.z || 0) - (w.z || 0)) ** 2
+      (m.x - w.x) ** 2 + (m.y - w.y) ** 2 + ((m.z || 0) - (w.z || 0)) ** 2,
     );
-    return Math.min(1, Math.max(0, (d - 0.12) / 0.30));
+    return Math.min(1, Math.max(0, (d - 0.12) / 0.3));
   }
 
   /** Initialise MediaPipe Hands + camera util. */
   function init() {
-    const videoEl = document.getElementById('webcam');
-    state.videoEl = videoEl;  // expose for p5 to draw
+    const videoEl = document.getElementById("webcam");
+    state.videoEl = videoEl; // expose for p5 to draw
 
     const hands = new Hands({
       locateFile: (file) =>
@@ -68,17 +68,33 @@ const HandTracker = (() => {
    * Called from main.js draw() so they appear on the full-screen view.
    */
   function drawLandmarksOnCanvas(p) {
-    if (!state.multiHandLandmarks || state.multiHandLandmarks.length === 0) return;
+    if (!state.multiHandLandmarks || state.multiHandLandmarks.length === 0)
+      return;
 
     for (const landmarks of state.multiHandLandmarks) {
       // ── Draw connections ──
       const connections = [
-        [0,1],[1,2],[2,3],[3,4],       // thumb
-        [0,5],[5,6],[6,7],[7,8],       // index
-        [5,9],[9,10],[10,11],[11,12],  // middle
-        [9,13],[13,14],[14,15],[15,16],// ring
-        [13,17],[17,18],[18,19],[19,20],// pinky
-        [0,17],                        // palm base
+        [0, 1],
+        [1, 2],
+        [2, 3],
+        [3, 4], // thumb
+        [0, 5],
+        [5, 6],
+        [6, 7],
+        [7, 8], // index
+        [5, 9],
+        [9, 10],
+        [10, 11],
+        [11, 12], // middle
+        [9, 13],
+        [13, 14],
+        [14, 15],
+        [15, 16], // ring
+        [13, 17],
+        [17, 18],
+        [18, 19],
+        [19, 20], // pinky
+        [0, 17], // palm base
       ];
 
       for (const [a, b] of connections) {

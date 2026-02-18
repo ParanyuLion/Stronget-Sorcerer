@@ -1,42 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Strongest Sorcerer — JJK Cursed Techniques</title>
-  <link rel="stylesheet" href="style.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strongest Sorcerer — JJK Cursed Techniques</title>
+    <link rel="stylesheet" href="style.css" />
 
-  <!-- p5.js -->
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+    <!-- p5.js -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
 
-  <!-- MediaPipe Hands (vision bundle) -->
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1675466862/camera_utils.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1675466124/drawing_utils.min.js"></script>
-</head>
-<body>
-  <!-- Webcam (hidden; piped to MediaPipe) -->
-  <video id="webcam" autoplay playsinline></video>
+    <!-- MediaPipe Hands (vision bundle) -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1675466862/camera_utils.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1675466124/drawing_utils.min.js"></script>
+  </head>
+  <body>
+    <!-- Webcam (hidden; piped to MediaPipe) -->
+    <video id="webcam" autoplay playsinline></video>
 
-  <!-- HUD overlay -->
-  <div id="hud">
-    <div id="technique-name"></div>
-    <div id="technique-sub"></div>
-    <div id="power-bar-container">
-      <div id="power-bar"></div>
+    <!-- HUD overlay -->
+    <div id="hud">
+      <div id="technique-name"></div>
+      <div id="technique-sub"></div>
+      <div id="power-bar-container">
+        <div id="power-bar"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- Prompt shown when idle -->
-  <div id="idle-prompt">Show a hand sign to activate a Cursed Technique</div>
+    <!-- Prompt shown when idle -->
+    <div id="idle-prompt">Show a hand sign to activate a Cursed Technique</div>
 
-  <!-- Modules (order matters) -->
-  <script src="js/handTracking.js"></script>
-  <script src="js/gestureDetection.js"></script>
-  <script src="js/effects/gojoEffect.js"></script>
-  <script src="js/effects/sukunaEffect.js"></script>
-  <script src="js/effects/megumiEffect.js"></script>
-  <script src="js/effects/mahitoEffect.js"></script>
-  <script src="js/main.js"></script>
-</body>
+    <!-- Modules (order matters) -->
+    <script src="js/handTracking.js"></script>
+    <script src="js/gestureDetection.js"></script>
+    <script src="js/effects/gojoEffect.js"></script>
+    <script src="js/effects/sukunaEffect.js"></script>
+    <script src="js/effects/megumiEffect.js"></script>
+    <script src="js/effects/mahitoEffect.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

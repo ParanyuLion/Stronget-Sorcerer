@@ -4,13 +4,13 @@
    ═══════════════════════════════════════════════════════════ */
 
 const GojoEffect = (() => {
-  const rings   = [];
-  const sparks  = [];
-  const voidPts = [];  // floating void particles
+  const rings = [];
+  const sparks = [];
+  const voidPts = []; // floating void particles
 
-  const MAX_RINGS  = 12;
+  const MAX_RINGS = 12;
   const MAX_SPARKS = 200;
-  const MAX_VOID   = 120;
+  const MAX_VOID = 120;
 
   /* ── Ring class ── */
   class Ring {
@@ -21,7 +21,7 @@ const GojoEffect = (() => {
       this.maxR = p.random(200, 600) * (0.6 + power);
       this.speed = p.random(3, 8);
       this.weight = p.random(1, 3.5);
-      this.hue = p.random(250, 290);   // purple range
+      this.hue = p.random(250, 290); // purple range
       this.alpha = 255;
       this.sides = p.random([0, 6, 8, 12]); // 0 = circle
       this.rot = p.random(p.TWO_PI);
