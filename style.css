@@ -1,0 +1,114 @@
+/* ─── Reset & Base ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: #fff;
+}
+
+/* ─── Hidden raw webcam element (must not be display:none or drawImage fails) ─── */
+#webcam {
+  position: fixed;
+  top: 0; left: 0;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── Webcam preview (no longer used — full-screen via p5 canvas) ─── */
+#webcam-preview {
+  display: none;
+}
+
+/* ─── p5.js main canvas (fills screen) ─── */
+canvas.p5Canvas {
+  display: block;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 1;
+}
+
+/* ─── HUD Overlay ─── */
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  pointer-events: none;
+  text-align: center;
+  padding-top: 28px;
+}
+
+#technique-name {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 30px currentColor, 0 0 60px currentColor;
+  opacity: 0;
+  transition: opacity 0.45s ease, color 0.45s ease, text-shadow 0.45s ease;
+}
+#technique-name.active { opacity: 1; }
+
+#technique-sub {
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+#technique-sub.active { opacity: 1; }
+
+/* ─── Power bar (maps depth / hand size) ─── */
+#power-bar-container {
+  width: 200px;
+  height: 6px;
+  margin: 14px auto 0;
+  background: rgba(255,255,255,0.12);
+  border-radius: 3px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+#power-bar-container.active { opacity: 1; }
+
+#power-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #7b2ff2, #ff2d95);
+  border-radius: 3px;
+  transition: width 0.15s ease;
+}
+
+/* ─── Idle prompt ─── */
+#idle-prompt {
+  position: fixed;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 50;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  animation: pulse-idle 3s ease-in-out infinite;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#idle-prompt.hidden { opacity: 0; }
+
+@keyframes pulse-idle {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.7; }
+}
+
+/* ─── Technique‑specific accent colours ─── */
+.accent-gojo    { color: #b388ff !important; text-shadow: 0 0 30px #b388ff, 0 0 60px #7c4dff !important; }
+.accent-sukuna  { color: #ff1744 !important; text-shadow: 0 0 30px #ff1744, 0 0 60px #d50000 !important; }
+.accent-megumi  { color: #00e5ff !important; text-shadow: 0 0 30px #00e5ff, 0 0 60px #0091ea !important; }
+.accent-mahito  { color: #76ff03 !important; text-shadow: 0 0 30px #76ff03, 0 0 60px #64dd17 !important; }
