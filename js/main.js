@@ -17,6 +17,7 @@ const EFFECTS = {
     label: "Unlimited Void",
     sub: "無量空処 — Domain Expansion",
     accent: "accent-gojo",
+    threejs: true,
   },
   SUKUNA_MALEVOLENT_SHRINE: {
     module: SukunaEffect,
@@ -59,8 +60,9 @@ function setup() {
   colorMode(RGB, 255, 255, 255, 255);
   _p5 = this;
   HandTracker.init();
-  // Initialise Three.js Hollow Purple scene
+  // Initialise Three.js scenes
   HollowPurpleEffect.init();
+  GojoEffect.init();
 }
 
 function windowResized() {
@@ -125,7 +127,7 @@ function draw() {
         EFFECTS[prevTechnique].module.deactivate();
       }
     }
-    // Activate Three.js loop when entering hollow purple
+    // Activate Three.js loop when entering a threejs technique
     if (
       activeTechnique &&
       EFFECTS[activeTechnique] &&
@@ -143,8 +145,11 @@ function draw() {
     const power = ht.handPower;
 
     if (fx.threejs) {
-      // Pass INDEX_FINGER_TIP landmark to Three.js for ball tracking
-      if (ht.multiHandLandmarks.length > 0) {
+      // Pass hand landmarks to Three.js effects that need them
+      if (
+        activeTechnique === "GOJO_HOLLOW_PURPLE" &&
+        ht.multiHandLandmarks.length > 0
+      ) {
         HollowPurpleEffect.setLandmarkPosition(ht.multiHandLandmarks[0][8]);
       }
     } else {
@@ -155,10 +160,12 @@ function draw() {
 
     elBar.style.width = `${power * 100}%`;
   } else {
-    // Still update lingering particles from the last effect
+    // Update/draw lingering particles from p5-based effects only
     for (const key in EFFECTS) {
-      EFFECTS[key].module.update(_p5);
-      EFFECTS[key].module.draw(_p5);
+      if (!EFFECTS[key].threejs) {
+        EFFECTS[key].module.update(_p5);
+        EFFECTS[key].module.draw(_p5);
+      }
     }
   }
 
